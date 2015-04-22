@@ -308,7 +308,8 @@ public class MusicProvider {
                 .putString(MediaMetadataCompat.METADATA_KEY_GENRE, genre)
                 .putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ART_URI, iconUrl)
                 .putString(MediaMetadataCompat.METADATA_KEY_TITLE, title)
-                .putLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER, trackNumber * 1L)
+                .putLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER, trackNumber)
+               // Note: With MediaMetadataCompat we seem to crash when setting the total track count.
                // .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, totalTrackCount * 1L)
 
                 .build();
