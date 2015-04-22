@@ -15,8 +15,9 @@
  */
 package com.example.android.uamp;
 
-import android.media.session.PlaybackState;
 import android.net.Uri;
+import android.support.v4.media.MediaMetadataCompat;
+import android.support.v4.media.session.PlaybackStateCompat;
 import android.text.TextUtils;
 
 import com.example.android.uamp.model.MusicProvider;
@@ -35,7 +36,7 @@ import com.google.android.libraries.cast.companionlibrary.cast.exceptions.Transi
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static android.media.session.MediaSession.QueueItem;
+import static android.support.v4.media.session.MediaSessionCompat.QueueItem;
 
 /**
  * An implementation of Playback that talks to Cast.
@@ -63,7 +64,7 @@ public class CastPlayback implements Playback {
         }
     };
 
-    /** The current PlaybackState*/
+    /** The current PlaybackStateCompat*/
     private int mState;
     /** Callback for making completion/error calls on */
     private Callback mCallback;
@@ -84,7 +85,7 @@ public class CastPlayback implements Playback {
     @Override
     public void stop(boolean notifyListeners) {
         mCastManager.removeVideoCastConsumer(mCastConsumer);
-        mState = PlaybackState.STATE_STOPPED;
+        mState = PlaybackStateCompat.STATE_STOPPED;
         if (notifyListeners && mCallback != null) {
             mCallback.onPlaybackStatusChanged(mState);
         }
@@ -117,7 +118,7 @@ public class CastPlayback implements Playback {
     public void play(QueueItem item) {
         try {
             loadMedia(item.getDescription().getMediaId(), true);
-            mState = PlaybackState.STATE_BUFFERING;
+            mState = PlaybackStateCompat.STATE_BUFFERING;
             if (mCallback != null) {
                 mCallback.onPlaybackStatusChanged(mState);
             }
@@ -210,7 +211,7 @@ public class CastPlayback implements Playback {
     private void loadMedia(String mediaId, boolean autoPlay) throws
         TransientNetworkDisconnectionException, NoConnectionException, JSONException {
         String musicId = MediaIDHelper.extractMusicIDFromMediaID(mediaId);
-        android.media.MediaMetadata track = mMusicProvider.getMusic(musicId);
+        MediaMetadataCompat track = mMusicProvider.getMusic(musicId);
         if (!TextUtils.equals(mediaId, mCurrentMediaId)) {
             mCurrentMediaId = mediaId;
             mCurrentPosition = 0;
@@ -222,27 +223,28 @@ public class CastPlayback implements Playback {
     }
 
     /**
-     * Helper method to convert a {@link android.media.MediaMetadata} to a
+     * Helper method to convert a {@link MediaMetadataCompat} to a
      * {@link com.google.android.gms.cast.MediaInfo} used for sending media to the receiver app.
      *
      * @param track {@link com.google.android.gms.cast.MediaMetadata}
      * @param customData custom data specifies the local mediaId used by the player.
      * @return mediaInfo {@link com.google.android.gms.cast.MediaInfo}
      */
-    private static MediaInfo toCastMediaMetadata(android.media.MediaMetadata track,
+    private static MediaInfo toCastMediaMetadata(MediaMetadataCompat track,
                                                  JSONObject customData) {
+
         MediaMetadata mediaMetadata = new MediaMetadata(MediaMetadata.MEDIA_TYPE_MUSIC_TRACK);
         mediaMetadata.putString(MediaMetadata.KEY_TITLE,
                 track.getDescription().getTitle().toString());
         mediaMetadata.putString(MediaMetadata.KEY_SUBTITLE,
                 track.getDescription().getSubtitle().toString());
         mediaMetadata.putString(MediaMetadata.KEY_ALBUM_ARTIST,
-                track.getString(android.media.MediaMetadata.METADATA_KEY_ALBUM_ARTIST));
+                track.getString(MediaMetadataCompat.METADATA_KEY_ALBUM_ARTIST));
         mediaMetadata.putString(MediaMetadata.KEY_ALBUM_TITLE,
-                track.getString(android.media.MediaMetadata.METADATA_KEY_ALBUM));
+                track.getString(MediaMetadataCompat.METADATA_KEY_ALBUM));
         WebImage image = new WebImage(
                 new Uri.Builder().encodedPath(
-                        track.getString(android.media.MediaMetadata.METADATA_KEY_ALBUM_ART_URI))
+                        track.getString(MediaMetadataCompat.METADATA_KEY_ALBUM_ART_URI))
                         .build());
         // First image is used by the receiver for showing the audio album art.
         mediaMetadata.addImage(image);
@@ -302,20 +304,20 @@ public class CastPlayback implements Playback {
                 }
                 break;
             case MediaStatus.PLAYER_STATE_BUFFERING:
-                mState = PlaybackState.STATE_BUFFERING;
+                mState = PlaybackStateCompat.STATE_BUFFERING;
                 if (mCallback != null) {
                     mCallback.onPlaybackStatusChanged(mState);
                 }
                 break;
             case MediaStatus.PLAYER_STATE_PLAYING:
-                mState = PlaybackState.STATE_PLAYING;
+                mState = PlaybackStateCompat.STATE_PLAYING;
                 updateMetadata();
                 if (mCallback != null) {
                     mCallback.onPlaybackStatusChanged(mState);
                 }
                 break;
             case MediaStatus.PLAYER_STATE_PAUSED:
-                mState = PlaybackState.STATE_PAUSED;
+                mState = PlaybackStateCompat.STATE_PAUSED;
                 updateMetadata();
                 if (mCallback != null) {
                     mCallback.onPlaybackStatusChanged(mState);

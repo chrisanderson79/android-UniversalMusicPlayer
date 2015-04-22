@@ -20,11 +20,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
-import android.media.MediaMetadata;
 import android.media.MediaPlayer;
 import android.media.session.PlaybackState;
 import android.net.wifi.WifiManager;
 import android.os.PowerManager;
+import android.support.v4.media.MediaMetadataCompat;
 import android.text.TextUtils;
 
 import com.example.android.uamp.model.MusicProvider;
@@ -37,7 +37,7 @@ import static android.media.MediaPlayer.OnCompletionListener;
 import static android.media.MediaPlayer.OnErrorListener;
 import static android.media.MediaPlayer.OnPreparedListener;
 import static android.media.MediaPlayer.OnSeekCompleteListener;
-import static android.media.session.MediaSession.QueueItem;
+import static android.support.v4.media.session.MediaSessionCompat.QueueItem;
 
 /**
  * A class that implements local media playback using {@link android.media.MediaPlayer}
@@ -84,10 +84,13 @@ public class LocalPlayback implements Playback, AudioManager.OnAudioFocusChangeL
             if (AudioManager.ACTION_AUDIO_BECOMING_NOISY.equals(intent.getAction())) {
                 LogHelper.d(TAG, "Headphones disconnected.");
                 if (isPlaying()) {
+
                     Intent i = new Intent(context, MusicService.class);
                     i.setAction(MusicService.ACTION_CMD);
                     i.putExtra(MusicService.CMD_NAME, MusicService.CMD_PAUSE);
+
                     mService.startService(i);
+
                 }
             }
         }
@@ -166,7 +169,7 @@ public class LocalPlayback implements Playback, AudioManager.OnAudioFocusChangeL
         } else {
             mState = PlaybackState.STATE_STOPPED;
             relaxResources(false); // release everything except MediaPlayer
-            MediaMetadata track = mMusicProvider.getMusic(
+            MediaMetadataCompat track = mMusicProvider.getMusic(
                     MediaIDHelper.extractMusicIDFromMediaID(item.getDescription().getMediaId()));
 
             String source = track.getString(MusicProvider.CUSTOM_METADATA_TRACK_SOURCE);

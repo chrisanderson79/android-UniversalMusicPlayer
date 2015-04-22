@@ -15,8 +15,8 @@
  */
 package com.example.android.uamp.ui;
 
-import android.support.v4.media.browse.MediaBrowserCompat;
+import android.support.v4.media.session.MediaControllerCompat;
 
-public interface MediaBrowserProvider {
-    MediaBrowserCompat getMediaBrowser();
+public interface MediaControllerProvider {
+    MediaControllerCompat getSupportMediaController();
 }

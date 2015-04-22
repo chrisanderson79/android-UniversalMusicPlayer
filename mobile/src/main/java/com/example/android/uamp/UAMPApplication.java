@@ -26,14 +26,15 @@ import static com.google.android.libraries.cast.companionlibrary.cast.BaseCastMa
 /**
  * The {@link Application} for the uAmp application.
  */
-public class UAMPApplication extends Application {
+public class UAMPApplication extends Application  {
 
     @Override
     public void onCreate() {
         super.onCreate();
         String applicationId = getResources().getString(R.string.cast_application_id);
-        VideoCastManager castManager = VideoCastManager.initialize(
-                getApplicationContext(), applicationId, FullScreenPlayerActivity.class, null);
+        VideoCastManager castManager = VideoCastManager.initialize(getApplicationContext(), applicationId, FullScreenPlayerActivity.class, null);
         castManager.enableFeatures(FEATURE_WIFI_RECONNECT | FEATURE_DEBUGGING);
+
     }
+
 }

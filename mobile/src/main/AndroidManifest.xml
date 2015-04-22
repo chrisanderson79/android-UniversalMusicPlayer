@@ -29,6 +29,9 @@
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="21" />
 
     <application
         android:name=".UAMPApplication"
@@ -100,9 +103,12 @@
             android:exported="true"
             tools:ignore="ExportedService">
             <intent-filter>
-                <action android:name="android.media.browse.MediaBrowserService" />
+                <action android:name="android.media.browse.MediaBrowserServiceCompat" />
             </intent-filter>
         </service>
+
+        <receiver android:name=".MediaButtonReceiver" />
+
 
         <!-- Service that keeps track of reconnecting to Cast when wifi is enabled. -->
         <service

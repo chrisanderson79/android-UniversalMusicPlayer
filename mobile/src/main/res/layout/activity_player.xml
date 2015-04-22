@@ -43,7 +43,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            custom:cardElevation="8dp">
+            custom:cardUseCompatPadding="true"
+            custom:cardElevation="8dp"
+            android:visibility="gone">
 
             <fragment android:name="com.example.android.uamp.ui.PlaybackControlsFragment"
                       android:id="@+id/fragment_playback_controls"

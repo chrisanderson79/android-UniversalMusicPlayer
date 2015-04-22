@@ -29,8 +29,7 @@ public class NetworkHelper {
      * @return true if connected, false otherwise.
      */
     public static boolean isOnline(Context context) {
-        ConnectivityManager connMgr = (ConnectivityManager)
-            context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         return (networkInfo != null && networkInfo.isConnected());
     }

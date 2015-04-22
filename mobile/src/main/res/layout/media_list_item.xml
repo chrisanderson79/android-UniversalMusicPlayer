@@ -23,8 +23,10 @@
         android:id="@+id/play_eq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/media_item_icon_margin_start"
         android:layout_marginStart="@dimen/media_item_icon_margin_start"
         android:tintMode="src_in"
         android:tint="@color/media_item_icon_not_playing"
@@ -34,7 +36,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/media_item_text_margin_start"
         android:layout_marginStart="@dimen/media_item_text_margin_start"
         android:layout_centerVertical="true"
         android:orientation="vertical">

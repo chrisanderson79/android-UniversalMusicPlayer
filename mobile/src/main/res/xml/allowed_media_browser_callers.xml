@@ -171,4 +171,8 @@ limitations under the License.
         ayLe0a1EQimlOalO762r0GXO0ks+UeXde2Z4e+8S/pf7pITEI/tP+MxJTALw9QUW
         Ev9lKTk+jkbqxbsh8nfBUapfKqYn0eidpwq2AzVp3juYl7//fKnaPhJD9gs=
     </signing_certificate>
+    <signing_certificate name="Media Browser Compat Simulator" release="false"
+        package="uam.com.serviceconnector">
+    MIIB5TCCAU6gAwIBAgIETs2EVjANBgkqhkiG9w0BAQUFADA3MQswCQYDVQQGEwJVUzEQMA4GA1UEChMHQW5kcm9pZDEWMBQGA1UEAxMNQW5kcm9pZCBEZWJ1ZzAeFw0xMTExMjMyMzQwMDZaFw00MTExMTUyMzQwMDZaMDcxCzAJBgNVBAYTAlVTMRAwDgYDVQQKEwdBbmRyb2lkMRYwFAYDVQQDEw1BbmRyb2lkIERlYnVnMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCTFd6SeJAqtYCw79Bzu1MXYD9eH6HHKO6Wmfgfl+08DpqSQnGafvGsse3XO60FvKzq4vm2LW+ENzUMxa84jnbWPzohnFYNu1+Pq26teduDrjCUHd/bKvdVkXQsrZdbGj3/Q14FYqnHi8NdYoJJWx7JGvN6yDMlmyq93Ff9asTuqQIDAQABMA0GCSqGSIb3DQEBBQUAA4GBAAIAvKwUAV3RMwIkgdO43fAUtmDHhWFWyhV7JEMAFCwc2I72Oyvi+8i/jYCfH/pUezKjqwCxJTF5S0HS7SES5lM1+TQcxFufL7P/AugkccRteF0RbKCZ2TbQJ4eEahPpRMrHWKLB5+GSPo0bg9DWKcqTl5x0sT+W6DyjqXUR6ojP
+</signing_certificate>
 </allowed_callers>
