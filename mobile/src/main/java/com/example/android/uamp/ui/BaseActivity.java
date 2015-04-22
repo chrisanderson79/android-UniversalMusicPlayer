@@ -48,7 +48,7 @@ public abstract class BaseActivity extends ActionBarCastActivity implements Medi
     private MediaBrowserCompat mMediaBrowser;
     private PlaybackControlsFragment mControlsFragment;
     private MediaControllerCompat mMediaController;
-    private View mConrolsContainer;
+    private View mControlsContainer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,7 +76,7 @@ public abstract class BaseActivity extends ActionBarCastActivity implements Medi
         super.onStart();
         LogHelper.d(TAG, "Activity onStart");
 
-        mConrolsContainer = findViewById(R.id.controls_container);
+        mControlsContainer = findViewById(R.id.controls_container);
         mControlsFragment = (PlaybackControlsFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_playback_controls);
         if (mControlsFragment == null) {
             throw new IllegalStateException("Mising fragment with id 'controls'. Cannot continue.");
@@ -124,7 +124,7 @@ public abstract class BaseActivity extends ActionBarCastActivity implements Medi
 //                    R.animator.slide_in_from_bottom, R.animator.slide_out_to_bottom)
 //                .show(mControlsFragment)
 //                .commit();
-            mConrolsContainer.setVisibility(View.VISIBLE);
+            mControlsContainer.setVisibility(View.VISIBLE);
         }
     }
 
@@ -133,7 +133,7 @@ public abstract class BaseActivity extends ActionBarCastActivity implements Medi
 //        getFragmentManager().beginTransaction()
 //            .hide(mControlsFragment)
 //            .commit();
-        mConrolsContainer.setVisibility(View.GONE);
+        mControlsContainer.setVisibility(View.GONE);
     }
 
     /**
@@ -189,47 +189,6 @@ public abstract class BaseActivity extends ActionBarCastActivity implements Medi
     // Callback that ensures that we are showing the controls
     private final MediaControllerCompat.Callback mMediaControllerCallback =
         new MediaControllerCompat.Callback() {
-            @Override
-            public void onSessionDestroyed() {
-                super.onSessionDestroyed();
-                LogHelper.d(TAG, "onSessionDestroyed");
-            }
-
-            @Override
-            public void onSessionEvent(String event, Bundle extras) {
-                super.onSessionEvent(event, extras);
-                LogHelper.d(TAG, "onSessionEvent");
-            }
-
-            @Override
-            public void onQueueChanged(List<MediaSessionCompat.QueueItem> queue) {
-                super.onQueueChanged(queue);
-                LogHelper.d(TAG, "onQueueChanged");
-            }
-
-            @Override
-            public void onQueueTitleChanged(CharSequence title) {
-                super.onQueueTitleChanged(title);
-                LogHelper.d(TAG, "onQueueTitleChanged");
-            }
-
-            @Override
-            public void onExtrasChanged(Bundle extras) {
-                super.onExtrasChanged(extras);
-                LogHelper.d(TAG, "onExtrasChanged");
-            }
-
-            @Override
-            public void onAudioInfoChanged(MediaControllerCompat.PlaybackInfo info) {
-                super.onAudioInfoChanged(info);
-                LogHelper.d(TAG, "onAudioInfoChanged");
-            }
-
-            @Override
-            public void binderDied() {
-                super.binderDied();
-                LogHelper.d(TAG, "binderDied");
-            }
 
             @Override
             public void onPlaybackStateChanged(PlaybackStateCompat state) {
@@ -256,18 +215,6 @@ public abstract class BaseActivity extends ActionBarCastActivity implements Medi
 
     private MediaBrowserCompat.ConnectionCallback mMediaBrowserConnectionCallback =
         new MediaBrowserCompat.ConnectionCallback() {
-
-            @Override
-            public void onConnectionSuspended() {
-                super.onConnectionSuspended();
-                LogHelper.d(TAG, "onConnectionSuspended");
-            }
-
-            @Override
-            public void onConnectionFailed() {
-                super.onConnectionFailed();
-                LogHelper.d(TAG, "onConnectionSuspended");
-            }
 
             @Override
             public void onConnected() {
