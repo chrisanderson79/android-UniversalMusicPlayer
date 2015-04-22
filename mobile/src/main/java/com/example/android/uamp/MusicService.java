@@ -639,6 +639,7 @@ public class MusicService extends MediaBrowserServiceCompat implements Playback.
             mPlayback.play(mPlayingQueue.get(mCurrentIndexOnQueue));
         }
 
+        // With the compatibility library this has to be set after the metadata.
         if (!mSession.isActive()) {
             mSession.setActive(true);
         }
