@@ -16,12 +16,12 @@
 package com.example.android.uamp.ui;
 
 import android.app.ActivityOptions;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -190,7 +190,7 @@ public abstract class ActionBarCastActivity extends ActionBarActivity {
         // Whenever the fragment back stack changes, we may need to update the
         // action bar toggle: only top level screens show the hamburger-like icon, inner
         // screens - either Activities or fragments - show the "Up" icon instead.
-        getFragmentManager().addOnBackStackChangedListener(mBackStackChangedListener);
+        getSupportFragmentManager().addOnBackStackChangedListener(mBackStackChangedListener);
     }
 
     @Override
@@ -206,7 +206,7 @@ public abstract class ActionBarCastActivity extends ActionBarActivity {
         super.onPause();
         mCastManager.removeVideoCastConsumer(mCastConsumer);
         mCastManager.decrementUiCounter();
-        getFragmentManager().removeOnBackStackChangedListener(mBackStackChangedListener);
+        getSupportFragmentManager().removeOnBackStackChangedListener(mBackStackChangedListener);
     }
 
     @Override
@@ -238,7 +238,7 @@ public abstract class ActionBarCastActivity extends ActionBarActivity {
             return;
         }
         // Otherwise, it may return to the previous fragment stack
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager.getBackStackEntryCount() > 0) {
             fragmentManager.popBackStack();
         } else {
@@ -330,7 +330,7 @@ public abstract class ActionBarCastActivity extends ActionBarActivity {
         if (mDrawerToggle == null) {
             return;
         }
-        boolean isRoot = getFragmentManager().getBackStackEntryCount() == 0;
+        boolean isRoot = getSupportFragmentManager().getBackStackEntryCount() == 0;
         mDrawerToggle.setDrawerIndicatorEnabled(isRoot);
         getSupportActionBar().setDisplayShowHomeEnabled(!isRoot);
         getSupportActionBar().setDisplayHomeAsUpEnabled(!isRoot);
